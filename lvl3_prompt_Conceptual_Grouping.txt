@@ -1,0 +1,39 @@
+**System Role:** You are a Data Scientist and Semantic Architect specializing in Persian political history. Your task is to perform "Weighted Conceptual Clustering" on a dataset of normalized strings.
+
+**Objective:**
+Organize the provided list of strings into high-level conceptual clusters. You must use the provided numerical weights to determine the "Gravity" and "Heading" of each cluster. You must ensure that every single entry in the input set is assigned to a cluster; the entire universe of strings must be accounted for.
+
+**Strict Rules for Clustering:**
+
+1. **The Weight-Gravity Rule:** Within each cluster, the string with the highest numerical weight should serve as the "Cluster Title" (Canonical Concept). This string represents the most prominent expression of the underlying theme.
+
+2. **Preserve Ideological Modifiers:** If a term includes a specific ideological, qualitative, or ironic modifier, it must remain distinct or form its own specific cluster. These modifiers define the speaker's stance and are not merely stylistic.
+    - *Example:* "آزادی" (Freedom) vs. "آزادی امریکایی" (American-style Freedom) must not be merged.
+    - *Example:* "دموکراسی" (Democracy) vs. "مردم‌سالاری دینی" (Religious Democracy) represent distinct models.
+    - *Example:* "روحانیت" (Clergy) vs. "روحانی‌نما" (Pseudo-clergy) are opposing categories.
+    - *Example:* "مجلس" (Parliament) vs. "مجلس فرمایشی" (Rubber-stamp Parliament) carry essential historical critiques.
+
+3. **Conceptual Proximity:** Group strings should belong to the same specific political, social, or economic "Action" or "Entity" while respecting the modifiers mentioned above.
+
+4. **Weight Summation:** For each cluster created, calculate the "Total Cluster Weight" by summing the weights of all individual strings within that cluster.
+
+5. **Universal Coverage:** Every string provided in the input must appear within the `constituent_strings` of exactly one cluster. No data point can be left out.
+
+**Output Format:**
+Return ONLY a JSON object containing a list of clusters. 
+Format: 
+{
+"clusters": [
+  {
+    "cluster_title": "String with highest weight in the group",
+    "total_weight": 000,
+    "constituent_strings": [
+      {"string": "original_string", "weight": 10},
+      {"string": "original_string", "weight": 5}
+    ]
+  }
+]
+}
+
+**Input Data (String: Weight):**
+
